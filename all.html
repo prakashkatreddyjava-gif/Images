@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koushik's 1st Birthday Celebration 🎉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            overflow-y: auto;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        #startOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: opacity 0.8s ease;
+        }
+
+        #startOverlay.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .start-content {
+            text-align: center;
+            animation: pulseStart 2s infinite;
+            pointer-events: none;
+        }
+
+        .start-emoji {
+            font-size: 100px;
+            margin-bottom: 20px;
+            animation: bounce 1s infinite;
+            filter: drop-shadow(0 0 20px rgba(255,215,0,0.8));
+        }
+
+        .start-title {
+            color: white;
+            font-size: 48px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(255,215,0,0.6), 3px 3px 6px rgba(0,0,0,0.3);
+            font-weight: bold;
+        }
+
+        .start-subtitle {
+            color: #ffd700;
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: glow 2s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px rgba(255,215,0,0.5); }
+            50% { text-shadow: 0 0 30px rgba(255,215,0,1); }
+        }
+
+        .start-pointer {
+            font-size: 60px;
+            animation: point 1.5s infinite;
+        }
+
+        @keyframes pulseStart {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes point {
+            0%, 100% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(10px); opacity: 0.7; }
+        }
+
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: linear-gradient(135deg, #ff6b9d, #ff8fab);
+            border: none;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            font-size: 32px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.5);
+            transition: all 0.3s ease;
+            animation: musicPulse 2s infinite;
+        }
+
+        .music-control:hover {
+            transform: scale(1.2) rotate(15deg);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.8);
+        }
+
+        @keyframes musicPulse {
+            0%, 100% { box-shadow: 0 10px 30px rgba(255, 107, 157, 0.5); }
+            50% { box-shadow: 0 10px 40px rgba(255, 107, 157, 1); }
+        }
+
+        .invitation-container {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .balloon {
+            position: absolute;
+            width: 80px;
+            height: 100px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: float 10s ease-in-out infinite;
+            opacity: 0.85;
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.4));
+        }
+
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 50px;
+            background: linear-gradient(to bottom, currentColor, transparent);
+        }
+
+        .balloon::before {
+            content: '✨';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 20px;
+            animation: sparkle 2s infinite;
+        }
+
+        .balloon:nth-child(1) { background: linear-gradient(135deg, #ff1744, #ff6b9d); left: 5%; animation-delay: 0s; }
+        .balloon:nth-child(2) { background: linear-gradient(135deg, #ffd700, #ffed4e); left: 15%; animation-delay: 1.5s; }
+        .balloon:nth-child(3) { background: linear-gradient(135deg, #00e676, #69f0ae); left: 85%; animation-delay: 3s; }
+        .balloon:nth-child(4) { background: linear-gradient(135deg, #2979ff, #82b1ff); left: 95%; animation-delay: 4.5s; }
+        .balloon:nth-child(5) { background: linear-gradient(135deg, #d500f9, #e040fb); left: 50%; animation-delay: 2s; }
+        .balloon:nth-child(6) { background: linear-gradient(135deg, #ff6d00, #ff9e40); left: 30%; animation-delay: 5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(120vh) rotate(-10deg) scale(0.8); }
+            50% { transform: translateY(-20vh) rotate(10deg) scale(1.3); }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+            box-shadow: 0 0 15px rgba(255,255,255,0.9);
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.8); }
+        }
+
+        .card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 40px;
+            max-width: 1200px;
+            width: 95%;
+            box-shadow: 0 50px 120px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.3) inset, 0 0 100px rgba(255, 107, 157, 0.4);
+            animation: cardEntrance 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 10;
+            border: 3px solid rgba(255, 255, 255, 0.6);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            transition: all 0.5s ease;
+            margin: 40px auto;
+        }
+
+        .card:hover {
+            box-shadow: 0 60px 140px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.3) inset, 0 0 150px rgba(255, 107, 157, 0.6);
+        }
+
+        @keyframes cardEntrance {
+            0% { opacity: 0; transform: scale(0.5) rotateY(90deg); }
+            60% { transform: scale(1.05) rotateY(-5deg); }
+            100% { opacity: 1; transform: scale(1) rotateY(0deg); }
+        }
+
+        .left-side {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+            overflow: hidden;
+            border-radius: 40px 0 0 40px;
+        }
+
+        .left-side::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: rotateGradient 15s linear infinite;
+        }
+
+        @keyframes rotateGradient {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .right-side {
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 20%, #ffffff 100%);
+            border-radius: 0 40px 40px 0;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 1.5s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .celebration-text {
+            font-size: 38px;
+            background: linear-gradient(45deg, #fff, #ffd700, #fff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+            margin-bottom: 10px;
+            animation: shimmer 3s ease infinite;
+            filter: drop-shadow(2px 2px 8px rgba(0,0,0,0.3));
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: 22px;
+            color: white;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .photo-container {
+            text-align: center;
+            margin: 30px 0;
+            animation: photoZoom 2s ease-out 0.3s both;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes photoZoom {
+            0% { opacity: 0; transform: scale(0) rotate(-180deg); }
+            70% { transform: scale(1.1) rotate(10deg); }
+            100% { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+
+        .photo-frame {
+            display: inline-block;
+            padding: 15px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);
+            background-size: 200% 200%;
+            animation: photoFloat 3s ease-in-out infinite, frameGlow 3s ease infinite;
+            border-radius: 20px;
+            box-shadow: 0 30px 90px rgba(255, 215, 0, 0.6), 0 0 60px rgba(255, 255, 255, 0.8) inset;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .photo-frame:hover {
+            transform: scale(1.08) translateY(-10px) !important;
+        }
+
+        @keyframes photoFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-15px) scale(1.05); }
+        }
+
+        @keyframes frameGlow {
+            0%, 100% { background-position: 0% 50%; box-shadow: 0 30px 90px rgba(255, 215, 0, 0.6), 0 0 60px rgba(255, 255, 255, 0.8) inset; }
+            50% { background-position: 100% 50%; box-shadow: 0 40px 110px rgba(255, 215, 0, 0.9), 0 0 80px rgba(255, 255, 255, 1) inset; }
+        }
+
+        .photo-frame::before,
+        .photo-frame::after {
+            content: '✨';
+            position: absolute;
+            font-size: 45px;
+            animation: sparkleFloat 2s infinite;
+        }
+
+        .photo-frame::before {
+            top: -25px;
+            right: -25px;
+        }
+
+        .photo-frame::after {
+            bottom: -25px;
+            left: -25px;
+            animation-delay: 1s;
+        }
+
+        @keyframes sparkleFloat {
+            0%, 100% { transform: rotate(0deg) scale(1); opacity: 1; }
+            50% { transform: rotate(180deg) scale(1.4); opacity: 0.7; }
+        }
+
+        .photo {
+            width: 250px;
+            height: 250px;
+            border-radius: 15px;
+            object-fit: cover;
+            border: 6px solid rgba(255,255,255,0.6);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+            display: block;
+        }
+
+        .gallery-section {
+            margin: 30px 0;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 2s ease-in 1s both;
+        }
+
+        .gallery-title {
+            text-align: center;
+            font-size: 28px;
+            color: white;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .gallery-icon {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255,255,255,0.5);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .gallery-icon:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 12px 30px rgba(255, 215, 0, 0.5);
+            border-color: #ffd700;
+        }
+
+        .gallery-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .name {
+            font-size: 42px;
+            font-weight: bold;
+            color: white;
+            margin: 25px 0 15px 0;
+            text-shadow: 0 0 20px rgba(255,215,0,0.8), 4px 4px 8px rgba(0,0,0,0.4);
+            animation: nameBounce 2s infinite;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        @keyframes nameBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.05); }
+        }
+
+        .turning-one {
+            font-size: 52px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: scaleGlow 2s infinite, shimmer 3s ease infinite;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(4px 4px 10px rgba(0,0,0,0.4));
+            text-align: center;
+        }
+
+        @keyframes scaleGlow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.6);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            font-size: 50px;
+            color: white;
+            cursor: pointer;
+            background: rgba(255, 107, 157, 0.8);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 3px solid white;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 107, 157, 1);
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 50px;
+            color: white;
+            cursor: pointer;
+            background: rgba(102, 126, 234, 0.8);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 3px solid white;
+        }
+
+        .modal-nav:hover {
+            background: rgba(102, 126, 234, 1);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .modal-prev {
+            left: 20px;
+        }
+
+        .modal-next {
+            right: 20px;
+        }
+
+        .details-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .details-header h2 {
+            font-size: 32px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .details {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(252,182,159,0.3) 100%);
+            border-radius: 25px;
+            padding: 25px;
+            animation: slideUp 1.8s ease-out 1s both;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            border: 2px solid rgba(255,255,255,0.5);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            font-size: 17px;
+            color: #333;
+            padding: 12px 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 2px solid transparent;
+        }
+
+        .detail-item:hover {
+            transform: translateX(10px) scale(1.05);
+            background: linear-gradient(135deg, #fff, #ffe6f0);
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
+            border-color: #ff6b9d;
+        }
+
+        .icon {
+            font-size: 32px;
+            margin-right: 15px;
+            animation: iconDance 3s ease-in-out infinite;
+        }
+
+        @keyframes iconDance {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-15deg) scale(1.1); }
+            50% { transform: rotate(0deg) scale(1); }
+            75% { transform: rotate(15deg) scale(1.1); }
+        }
+
+        .detail-text {
+            flex: 1;
+        }
+
+        .label {
+            font-weight: bold;
+            background: linear-gradient(135deg, #764ba2, #667eea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 3px;
+            font-size: 16px;
+        }
+
+        .value {
+            color: #555;
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        .map-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .map-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
+        }
+
+        .map-container {
+            margin-top: 20px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 2s ease-in 2.2s both;
+            border: 3px solid rgba(255,255,255,0.6);
+            background: white;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+            display: block;
+        }
+
+        .special-note {
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe6f0 100%);
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+            animation: fadeIn 2s ease-in 1.5s both;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.3);
+            border: 2px solid rgba(255, 192, 203, 0.5);
+        }
+
+        .special-note h3 {
+            background: linear-gradient(135deg, #ff6b9d, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .special-note p {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .countdown-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 20px;
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+            animation: fadeIn 2s ease-in 1.8s both;
+        }
+
+        .countdown-title {
+            text-align: center;
+            color: white;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        #countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .countdown-item {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 18px 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.5);
+        }
+
+        .countdown-item:hover {
+            transform: translateY(-8px) scale(1.08);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.5);
+            border-color: #ffd700;
+        }
+
+        .countdown-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+            animation: countPulse 1s infinite;
+            display: block;
+        }
+
+        @keyframes countPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .countdown-label {
+            font-size: 12px;
+            color: #666;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            animation: fadeIn 2.5s ease-in 2s both;
+        }
+
+        .rsvp {
+            font-size: 18px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .hearts {
+            font-size: 28px;
+            animation: heartbeat 1.2s infinite;
+            filter: drop-shadow(2px 2px 4px rgba(255, 107, 157, 0.4));
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            10%, 30% { transform: scale(1.25); }
+            20%, 40% { transform: scale(1); }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            animation: confettiFall 10s linear infinite;
+            border-radius: 3px;
+            pointer-events: none;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .sparkle-effect {
+            position: absolute;
+            font-size: 24px;
+            animation: sparkleAnim 2.5s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes sparkleAnim {
+            0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1.8) rotate(180deg); }
+        }
+
+        @keyframes fireworkParticle {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .card {
+                grid-template-columns: 1fr;
+            }
+            
+            .left-side {
+                border-radius: 40px 40px 0 0;
+            }
+            
+            .right-side {
+                border-radius: 0 0 40px 40px;
+            }
+            
+            .left-side, .right-side {
+                padding: 40px 30px;
+            }
+            
+            .photo {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .name {
+                font-size: 38px;
+            }
+            
+            .turning-one {
+                font-size: 50px;
+            }
+            
+            #countdown {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .image-gallery {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                width: 100%;
+                border-radius: 20px;
+            }
+            
+            .left-side {
+                border-radius: 20px 20px 0 0;
+            }
+            
+            .right-side {
+                border-radius: 0 0 20px 20px;
+            }
+            
+            .left-side, .right-side {
+                padding: 30px 25px;
+            }
+            
+            .photo {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .name {
+                font-size: 32px;
+            }
+            
+            .turning-one {
+                font-size: 42px;
+            }
+            
+            .celebration-text {
+                font-size: 28px;
+            }
+            
+            .start-title {
+                font-size: 32px;
+            }
+
+            .start-subtitle {
+                font-size: 18px;
+            }
+
+            #countdown {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .countdown-number {
+                font-size: 28px;
+            }
+
+            .map-container iframe {
+                height: 250px;
+            }
+
+            .image-gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .modal-nav {
+                font-size: 40px;
+                width: 50px;
+                height: 50px;
+            }
+
+            .modal-close {
+                font-size: 40px;
+                width: 50px;
+                height: 50px;
+                top: -60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="startOverlay" onclick="startCelebration()">
+        <div class="start-content">
+            <div class="start-emoji">🎉</div>
+            <h1 class="start-title">Koushik's Grand 1st Birthday Bash!</h1>
+            <p class="start-subtitle">🎵 Click anywhere to start the celebration 🎵</p>
+            <div class="start-pointer">👇</div>
+        </div>
+    </div>
+
+    <button class="music-control" id="musicBtn" onclick="toggleMusic()" title="Music playing... Click to pause">🎶</button>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">✖</span>
+            <span class="modal-nav modal-prev" onclick="prevImage()">❮</span>
+            <img id="modal-image" class="modal-image">
+            <span class="modal-nav modal-next" onclick="nextImage()">❯</span>
+        </div>
+    </div>
+
+    <div class="invitation-container">
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+
+        <div class="stars" id="stars"></div>
+
+        <div class="card">
+            <div class="left-side">
+                <div class="header">
+                    <div class="celebration-text">🎉 IT'S A CELEBRATION 🎉</div>
+                    <div class="subtitle">Join us for a magical day!</div>
+                </div>
+
+                <div class="photo-container">
+                    <div class="photo-frame">
+                        <img class="photo" src="https://raw.githubusercontent.com/prakashkatreddyjava-gif/Images/main/Koushik.jpeg" alt="Koushik">
+                    </div>
+                </div>
+
+                <div class="gallery-section">
+                    <h2 class="gallery-title">📸 Celebrating with Our Family 📸</h2>
+                    <div class="image-gallery">
+                        <div class="gallery-icon" onclick="openModal(0)">
+                            <img src="https://raw.githubusercontent.com/prakashkatreddyjava-gif/Images/main/PP.jpg" alt="Family">
+                        </div>
+                        <div class="gallery-icon" onclick="openModal(1)">
+                            <img src="https://raw.githubusercontent.com/prakashkatreddyjava-gif/Images/main/MP.jpg" alt="Family">
+                        </div>
+                        <div class="gallery-icon" onclick="openModal(2)">
+                            <img src="https://raw.githubusercontent.com/prakashkatreddyjava-gif/Images/main/PU.jpg" alt="Family">
+                        </div>
+                        <div class="gallery-icon" onclick="openModal(3)">
+                            <img src="https://raw.githubusercontent.com/prakashkatreddyjava-gif/Images/main/MU.jpg" alt="Family">
+                        </div>
+                        <div class="gallery-icon" onclick="openModal(4)">
+                            <img src="https://raw.githubusercontent.com/prakashkatreddyjava-gif/Images/main/OP1.jpg" alt="Family">
+                        </div>
+                        <div class="gallery-icon" onclick="openModal(5)">
+                            <img src="https://raw.githubusercontent.com/prakashkatreddyjava-gif/Images/main/OS.jpg" alt="Family">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="name">Koushik Katreddy</div>
+                <div class="turning-one">Turning 1! 🎂</div>
+            </div>
+
+            <div class="right-side">
+                <div class="details-header">
+                    <h2>🎊 Venue Details 🎊</h2>
+                </div>
+
+                <div class="details">
+                    <div class="detail-item">
+                        <span class="icon">📅</span>
+                        <div class="detail-text">
+                            <span class="label">Date:</span>
+                            <span class="value">Sunday, 21st December 2025</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="icon">⏰</span>
+                        <div class="detail-text">
+                            <span class="label">Time:</span>
+                            <span class="value">10:00 AM Onwards</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="icon">📍</span>
+                        <div class="detail-text">
+                            <span class="label">Venue:</span>
+                            <span class="value">VSS Gardens(mini), Bhimavaram<br>Andhra Pradesh</span>
+                            <a href="https://maps.google.com/?q=VSS+Gardens+Bhimavaram" target="_blank" class="map-button">
+                                🗺️ Open in Maps
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3821.234!2d81.5318!3d16.5398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTbCsDMyJzIzLjMiTiA4McKwMzEnNTQuNSJF!5e0!3m2!1sen!2sin!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+
+                <div class="special-note">
+                    <h3>✨ Special Note ✨</h3>
+                    <p>Come celebrate our little prince's first milestone! Your presence will make this day even more special. Join us for fun, laughter, cake, and lots of precious memories!</p>
+                </div>
+
+                <div class="countdown-section">
+                    <h3 class="countdown-title">⏳ Countdown to the Big Day ⏳</h3>
+                    <div id="countdown">
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="days">00</div>
+                            <div class="countdown-label">Days</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="hours">00</div>
+                            <div class="countdown-label">Hours</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="minutes">00</div>
+                            <div class="countdown-label">Mins</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="seconds">00</div>
+                            <div class="countdown-label">Secs</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <div class="rsvp">Your presence is the greatest gift!</div>
+                    <div class="hearts">💝 We can't wait to see you! 💝</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <script>
+        // Image gallery modal
+        const images = [
+            "https://raw.githubusercontent.com/prakashkatreddyjava-gif/Images/main/PP.jpg",
+            "https://raw.githubusercontent.com/prakashkatreddyjava-gif/Images/main/MP.jpg",
+            "https://raw.githubusercontent.com/prakashkatreddyjava-gif/Images/main/PU.jpg",
+            "https://raw.githubusercontent.com/prakashkatreddyjava-gif/Images/main/MU.jpg",
+            "https://raw.githubusercontent.com/prakashkatreddyjava-gif/Images/main/OP1.jpg",
+            "https://raw.githubusercontent.com/prakashkatreddyjava-gif/Images/main/OS.jpg",
+        ];
+
+        let currentIndex = 0;
+
+        function openModal(index) {
+            currentIndex = index;
+            document.getElementById("modal").classList.add("active");
+            document.getElementById("modal-image").src = images[currentIndex];
+        }
+
+        function closeModal() {
+            document.getElementById("modal").classList.remove("active");
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            document.getElementById("modal-image").src = images[currentIndex];
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            document.getElementById("modal-image").src = images[currentIndex];
+        }
+
+        // Music functionality
+        let musicPlaying = false;
+        let synth, bassLine, melody;
+        let musicInitialized = false;
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        async function initMusic() {
+            if (musicInitialized) return;
+            try {
+                synth = new Tone.PolySynth(Tone.Synth, {
+                    oscillator: { type: 'sine' },
+                    envelope: { attack: 0.1, decay: 0.2, sustain: 0.3, release: 1 }
+                }).toDestination();
+                synth.volume.value = -8;
+
+                const bass = new Tone.Synth({
+                    oscillator: { type: 'triangle' },
+                    envelope: { attack: 0.1, decay: 0.3, sustain: 0.4, release: 1.2 }
+                }).toDestination();
+                bass.volume.value = -12;
+
+                const melodyNotes = [
+                    { time: '0:0', note: 'C4', duration: '8n' },
+                    { time: '0:0.5', note: 'C4', duration: '8n' },
+                    { time: '0:1', note: 'D4', duration: '4n' },
+                    { time: '0:2', note: 'C4', duration: '4n' },
+                    { time: '0:3', note: 'F4', duration: '4n' },
+                    { time: '1:0', note: 'E4', duration: '2n' },
+                    { time: '2:0', note: 'C4', duration: '8n' },
+                    { time: '2:0.5', note: 'C4', duration: '8n' },
+                    { time: '2:1', note: 'D4', duration: '4n' },
+                    { time: '2:2', note: 'C4', duration: '4n' },
+                    { time: '2:3', note: 'G4', duration: '4n' },
+                    { time: '3:0', note: 'F4', duration: '2n' },
+                    { time: '4:0', note: 'C4', duration: '8n' },
+                    { time: '4:0.5', note: 'C4', duration: '8n' },
+                    { time: '4:1', note: 'C5', duration: '4n' },
+                    { time: '4:2', note: 'A4', duration: '4n' },
+                    { time: '4:3', note: 'F4', duration: '4n' },
+                    { time: '5:0', note: 'E4', duration: '4n' },
+                    { time: '5:2', note: 'D4', duration: '4n' },
+                    { time: '6:0', note: 'Bb4', duration: '8n' },
+                    { time: '6:0.5', note: 'Bb4', duration: '8n' },
+                    { time: '6:1', note: 'A4', duration: '4n' },
+                    { time: '6:2', note: 'F4', duration: '4n' },
+                    { time: '6:3', note: 'G4', duration: '4n' },
+                    { time: '7:0', note: 'F4', duration: '2n' }
+                ];
+
+                const bassNotes = [
+                    { time: '0:0', note: 'C2', duration: '2n' },
+                    { time: '0:2', note: 'F2', duration: '2n' },
+                    { time: '1:0', note: 'C2', duration: '2n' },
+                    { time: '1:2', note: 'G2', duration: '2n' },
+                    { time: '2:0', note: 'C2', duration: '2n' },
+                    { time: '2:2', note: 'F2', duration: '2n' },
+                    { time: '3:0', note: 'C2', duration: '2n' },
+                    { time: '3:2', note: 'G2', duration: '2n' },
+                    { time: '4:0', note: 'C2', duration: '2n' },
+                    { time: '4:2', note: 'F2', duration: '2n' },
+                    { time: '5:0', note: 'C2', duration: '2n' },
+                    { time: '5:2', note: 'G2', duration: '2n' },
+                    { time: '6:0', note: 'F2', duration: '2n' },
+                    { time: '6:2', note: 'C2', duration: '2n' },
+                    { time: '7:0', note: 'F2', duration: '2n' },
+                    { time: '7:2', note: 'C2', duration: '2n' }
+                ];
+
+                melody = new Tone.Part((time, note) => {
+                    synth.triggerAttackRelease(note.note, note.duration, time);
+                }, melodyNotes);
+                melody.loop = true;
+                melody.loopEnd = '8m';
+
+                bassLine = new Tone.Part((time, note) => {
+                    bass.triggerAttackRelease(note.note, note.duration, time);
+                }, bassNotes);
+                bassLine.loop = true;
+                bassLine.loopEnd = '8m';
+
+                Tone.Transport.bpm.value = 100;
+                musicInitialized = true;
+            } catch (error) {
+                console.log('Music initialization failed:', error);
+                musicInitialized = false;
+            }
+        }
+
+        async function startMusic() {
+            try {
+                await Tone.start();
+                if (!musicInitialized) await initMusic();
+                if (!musicInitialized) return;
+                
+                melody.start(0);
+                bassLine.start(0);
+                Tone.Transport.start();
+                musicPlaying = true;
+                document.getElementById('musicBtn').textContent = '🎶';
+                document.getElementById('musicBtn').title = 'Music playing... Click to pause';
+            } catch (error) {
+                console.log('Music start failed:', error);
+                document.getElementById('musicBtn').textContent = '🔇';
+                document.getElementById('musicBtn').title = 'Music unavailable';
+            }
+        }
+
+        function stopMusic() {
+            try {
+                if (melody) melody.stop();
+                if (bassLine) bassLine.stop();
+                Tone.Transport.stop();
+                musicPlaying = false;
+                document.getElementById('musicBtn').textContent = '🎵';
+                document.getElementById('musicBtn').title = 'Music paused... Click to play';
+            } catch (error) {
+                console.log('Music stop failed:', error);
+            }
+        }
+
+        function toggleMusic() {
+            if (musicPlaying) {
+                stopMusic();
+            } else {
+                startMusic();
+            }
+        }
+
+        async function startCelebration() {
+            const overlay = document.getElementById('startOverlay');
+            overlay.classList.add('fade-out');
+            
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 800);
+            
+            await startMusic();
+            
+            setTimeout(createBurstOfConfetti, 500);
+            setTimeout(createBurstOfConfetti, 1500);
+            setTimeout(createBurstOfConfetti, 2500);
+        }
+
+        // Countdown timer
+        function updateCountdown() {
+            const eventDate = new Date('December 21, 2025 10:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            if (distance < 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Create stars
+        const starsContainer = document.getElementById('stars');
+        const starCount = isMobile ? 50 : 150;
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 6 + 2;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = (2 + Math.random() * 2) + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Create sparkles
+        const sparkleCount = isMobile ? 15 : 30;
+        for (let i = 0; i < sparkleCount; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle-effect';
+            sparkle.textContent = ['✨', '⭐', '💫', '🌟'][Math.floor(Math.random() * 4)];
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 2 + 's';
+            sparkle.style.animationDuration = (1.5 + Math.random()) + 's';
+            document.querySelector('.invitation-container').appendChild(sparkle);
+        }
+
+        // Confetti and fireworks
+        const colors = ['#ff1744', '#ffd700', '#00e676', '#2979ff', '#d500f9', '#ff6d00', '#f093fb'];
+        
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.top = -20 + 'px';
+            confetti.style.animationDelay = Math.random() * 10 + 's';
+            confetti.style.animationDuration = (8 + Math.random() * 4) + 's';
+            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.width = (Math.random() * 12 + 8) + 'px';
+            confetti.style.height = (Math.random() * 12 + 8) + 'px';
+            confetti.style.opacity = Math.random() * 0.6 + 0.4;
+            document.querySelector('.invitation-container').appendChild(confetti);
+            
+            setTimeout(() => confetti.remove(), 12000);
+        }
+
+        const confettiCount = isMobile ? 40 : 80;
+        for (let i = 0; i < confettiCount; i++) {
+            createConfetti();
+        }
+
+        function createBurstOfConfetti() {
+            for (let i = 0; i < 40; i++) {
+                setTimeout(createConfetti, i * 50);
+            }
+        }
+
+        function createFirework() {
+            const container = document.createElement('div');
+            container.style.position = 'absolute';
+            container.style.left = (20 + Math.random() * 60) + '%';
+            container.style.top = (20 + Math.random() * 40) + '%';
+            container.style.pointerEvents = 'none';
+            
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = '8px';
+                particle.style.height = '8px';
+                particle.style.borderRadius = '50%';
+                particle.style.background = color;
+                particle.style.boxShadow = `0 0 15px ${color}`;
+                
+                const angle = (Math.PI * 2 * i) / 20;
+                const distance = 80 + Math.random() * 60;
+                const duration = 1.2 + Math.random() * 0.6;
+                
+                particle.style.animation = `fireworkParticle ${duration}s ease-out forwards`;
+                particle.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
+                particle.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
+                
+                container.appendChild(particle);
+            }
+            
+            document.querySelector('.invitation-container').appendChild(container);
+            setTimeout(() => container.remove(), 2500);
+        }
+
+        setInterval(createFirework, 3000);
+        setTimeout(createFirework, 1200);
+
+        setInterval(createConfetti, 800);
+    </script>
+</body>
+</html>
